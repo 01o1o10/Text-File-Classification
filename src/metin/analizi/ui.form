@@ -12,6 +12,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="openfile">
               <Properties>
+                <Property name="mnemonic" type="int" value="79"/>
                 <Property name="text" type="java.lang.String" value="Open File"/>
               </Properties>
               <Events>
@@ -20,8 +21,12 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="openfolder">
               <Properties>
+                <Property name="mnemonic" type="int" value="70"/>
                 <Property name="text" type="java.lang.String" value="Open Folder"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="openfolderActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="exit">
               <Properties>
@@ -74,13 +79,44 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="166" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="learn" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="findclass" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="154" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="279" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+              <Component id="learn" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+              <Component id="findclass" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="120" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JButton" name="learn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Train"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="learnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="findclass">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Find Class"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="findclassActionPerformed"/>
+      </Events>
+    </Component>
+  </SubComponents>
 </Form>

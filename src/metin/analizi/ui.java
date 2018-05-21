@@ -5,17 +5,13 @@
  */
 package metin.analizi;
 
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author echelon
  */
 public class ui extends javax.swing.JFrame {
     
-    FafEvents faf = new FafEvents();
+    Controller c = new Controller();
     
     public ui() {
         initComponents();
@@ -25,6 +21,8 @@ public class ui extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        learn = new javax.swing.JButton();
+        findclass = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         file = new javax.swing.JMenu();
         openfile = new javax.swing.JMenuItem();
@@ -35,9 +33,24 @@ public class ui extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        learn.setText("Train");
+        learn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                learnActionPerformed(evt);
+            }
+        });
+
+        findclass.setText("Find Class");
+        findclass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                findclassActionPerformed(evt);
+            }
+        });
+
         file.setMnemonic('f');
         file.setText("File");
 
+        openfile.setMnemonic('O');
         openfile.setText("Open File");
         openfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -46,7 +59,13 @@ public class ui extends javax.swing.JFrame {
         });
         file.add(openfile);
 
+        openfolder.setMnemonic('F');
         openfolder.setText("Open Folder");
+        openfolder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openfolderActionPerformed(evt);
+            }
+        });
         file.add(openfolder);
 
         exit.setMnemonic('x');
@@ -75,11 +94,21 @@ public class ui extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(166, 166, 166)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(learn)
+                    .addComponent(findclass))
+                .addContainerGap(154, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(learn)
+                .addGap(57, 57, 57)
+                .addComponent(findclass)
+                .addContainerGap(120, Short.MAX_VALUE))
         );
 
         pack();
@@ -90,15 +119,20 @@ public class ui extends javax.swing.JFrame {
     }//GEN-LAST:event_exitActionPerformed
 
     private void openfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openfileActionPerformed
-        // TODO add your handling code here:
-        String filePath;
-        try {
-            filePath = faf.chooseFile();
-            System.out.println("Dosya seçildi!");
-        } catch (IOException ex) {
-            Logger.getLogger(ui.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        c.chooseFile();
     }//GEN-LAST:event_openfileActionPerformed
+
+    private void openfolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openfolderActionPerformed
+        c.chooseFolder();
+    }//GEN-LAST:event_openfolderActionPerformed
+
+    private void learnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_learnActionPerformed
+        c.ScanDataAndLearn();
+    }//GEN-LAST:event_learnActionPerformed
+
+    private void findclassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findclassActionPerformed
+        c.findClass();
+    }//GEN-LAST:event_findclassActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,7 +165,9 @@ public class ui extends javax.swing.JFrame {
     private javax.swing.JMenuItem about;
     private javax.swing.JMenuItem exit;
     private javax.swing.JMenu file;
+    private javax.swing.JButton findclass;
     private javax.swing.JMenu help;
+    private javax.swing.JButton learn;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openfile;
     private javax.swing.JMenuItem openfolder;
