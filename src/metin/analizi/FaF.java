@@ -79,19 +79,19 @@ public class FaF {
 
     public void scanSrc(File src) {
         if (src.isFile()) {
-            //System.out.println("src is file.");
+            System.out.println("src is file.");
             etgs.correctDataAndLearn(src);
         } else if (src.isDirectory()) {
-            //System.out.println("src is dir.");
+            System.out.println("src is dir.");
             for (String childName : src.list()) {
-                //System.out.println(src.getAbsolutePath() + "/" + childName);
+                System.out.println(src.getAbsolutePath() + "/" + childName);
                 File childSrc = new File(src.getAbsoluteFile() + "/" + childName);
                 if (childSrc.isFile()) {
                     System.out.println(childSrc);
-                    //System.out.println("childSrc is file.");
+                    System.out.println("childSrc is file.");
                     etgs.correctDataAndLearn(childSrc);
                 } else if (childSrc.isDirectory()) {
-                    //System.out.println("childSrc is dir.");
+                    System.out.println("childSrc is dir.");
                     scanSrc(childSrc);
                 }
             }

@@ -41,9 +41,7 @@ public class Etgs {
         for (String wordStop : wordStops) {
             doc = doc.replace(wordStop, "");
         }
-        /*doc = doc.toLowerCase();
-        System.out.println(doc);*/
- /*String[] words = doc.split(" ");
+        /*String[] words = doc.split(" ");
         try {
             TurkishMorphology morphology = TurkishMorphology.createWithDefaults();
             TurkishSpellChecker spellChecker = new TurkishSpellChecker(morphology);
@@ -53,13 +51,14 @@ public class Etgs {
                 if(!spellChecker.check(word)){
                     List<String> possiblities = spellChecker.suggestForWord(word);
                     Log.info(word + " -> " + possiblities);
-                    if (!possiblities.isEmpty()) {
-                        //System.out.println("Dizi boş değil.");
-                        //System.out.println(possiblities.get(0));
-                        //doc = doc.replace(word, possiblities.get(0));
+                    Log.info(word + " -> " + possiblities);
+                    if (!(possiblities.size() == 0)) {
+                        System.out.println("Dizi boş değil.");
+                        System.out.println(possiblities.get(0));
+                        doc = doc.replace(word, possiblities.get(0));
                     }
                     else{
-                        //System.out.println("Dizi boş.");
+                        System.out.println("Dizi boş.");
                     }
                 }
             }
@@ -70,7 +69,7 @@ public class Etgs {
         doc = doc.replaceAll("  ", " ");
         doc = doc.replaceAll("   ", " ");
         doc = doc.toLowerCase();
-        faf.writeFile(src, doc);
+        //faf.writeFile(src, doc);
         gramaj(doc, src);
 
     }
@@ -123,12 +122,13 @@ public class Etgs {
                     Map grams = (Map) doc.get(docKey);
                     Set kk = grams.keySet();
                     kk.forEach((k) -> {
+                        Log.info(k);
                         ng.put(k.toString(), (ng.containsKey(k.toString())) ? ng.get(k.toString()) + 1 : 1);//Her kategoride hangi gramdan kaç adet olduğunu elde edebilmek için gramların kategori bazında frekansı tutuluyor. daha sonra bütün kategorileri tek çatıda birleştirmek üzere tek çatıya ekleniyor.
                         totalGrams.put(k.toString(), (totalGrams.containsKey(k.toString())) ? totalGrams.get(k.toString()) + 1 : 1);//sayısı  altında olan gramları tespit edebilmek için bütün gramlar bu map a eklenir.
                     });
                 });
 
-                /*j++;
+                j++;
                 if (j > ((dosyaSayilari.get(key.toString()) * 75) / 100)) {
                     if (testGrams.containsKey(key.toString())) {
                         List<Map> newList = testGrams.get(key.toString());
@@ -139,7 +139,7 @@ public class Etgs {
                         newList.add(docList.get(j));
                         testGrams.put(key.toString(), newList);
                     }
-                }*/
+                }
             });
             Etgs.categorizedGrams.put(key.toString(), ng);//tek çatı dediğimiz burası
         });
@@ -154,10 +154,10 @@ public class Etgs {
             Set gramKeys = grams.keySet();//bulunduğu kategorinin gramlarının anahtarlarını alıyoruz.
             gramKeys.forEach((Object gramKey) -> {//her gramı dolaşıyoruz...
                 if (totalGrams.get(gramKey.toString()) > 50) {//eğer gramın frekansı tüm datasette 50 altında ise...
-                    ortalama.put(gramKey.toString(), (totalGrams.get(gramKey.toString()) / 230.0d));//kategoriye ait gram ortalamalarının saklanması...
-                    //System.out.println(ortalama.get(gramKey.toString()));
+                    ortalama.put(gramKey.toString(), (totalGrams.get(gramKey.toString())));//kategoriye ait gram ortalamalarının saklanması...
+                    System.out.println("Devam: " + ortalama.get(gramKey.toString()));
                 } else {//50 altında değilse siliyoruz.
-                    //System.out.println("Tamam: " + totalGrams.get(gramKey.toString()));
+                    System.out.println("Tamam: " + totalGrams.get(gramKey.toString()));
                     //grams.remove(gramKey.toString());
                 }
             });
